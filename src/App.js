@@ -1,39 +1,30 @@
 
-import React, { Component } from 'react'
+import React, { Component, useState } from 'react'
 import { CreateBoard } from './component/CreateBoard';
 
 import './App.css';
 
 
 
-export default class App extends Component {
-  constructor(){
-    super()
-    this.maxID = 0
-    this.state = {
-      objectArray: []
-    }
+export default function App(){
+
+
+  const [state, setState] = useState([])
+
+  const addNewObjectInArr = () => {
+    setState([
+      ...state,
+      {
+        id: Date.now()
+      }
+    ])
   }
 
-  
-  addNewObjectInArr = () => {
-    const createNewObject = {
-      id: this.maxID++
-    }
-    this.setState(({objectArray}) => {
-      const createNewObjectArray= [...objectArray, createNewObject]
-      return {objectArray : createNewObjectArray}
-    })
-  }
-
-
-  render() {
     return (
       <div className='conteiner'>
-        <div className='NewBoard' onClick = {this.addNewObjectInArr}><button>New Board!</button></div>
-        <CreateBoard title = {this.state.objectArray}/>
+        <div className='NewBoard' onClick = {addNewObjectInArr}><button>New Board!</button></div>
+        <CreateBoard title = {state}/>
       </div>
     )
-  }
 }
 
