@@ -1,25 +1,39 @@
-import logo from './logo.svg';
+
+import React, { Component } from 'react'
+import { CreateBoard } from './component/CreateBoard';
+
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+
+export default class App extends Component {
+  constructor(){
+    super()
+    this.maxID = 0
+    this.state = {
+      objectArray: []
+    }
+  }
+
+  
+  addNewObjectInArr = () => {
+    const createNewObject = {
+      id: this.maxID++
+    }
+    this.setState(({objectArray}) => {
+      const createNewObjectArray= [...objectArray, createNewObject]
+      return {objectArray : createNewObjectArray}
+    })
+  }
+
+
+  render() {
+    return (
+      <div className='conteiner'>
+        <div className='NewBoard' onClick = {this.addNewObjectInArr}><button>New Board!</button></div>
+        <CreateBoard title = {this.state.objectArray}/>
+      </div>
+    )
+  }
 }
 
-export default App;

@@ -1,38 +1,216 @@
-.App {
-  text-align: center;
+*{
+	padding: 0;
+	margin: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body{
+	background-color: #b2a4e6;
+	display: inline;
+	justify-content: center;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.divStyle button{
+	height: 50px;
+	border: 2px solid #b2a4e6;
+	font-size: 30px;
+	width: 150px;
+	padding: 4px;
+	margin: 3px;
+	border-radius: 20px;
+	outline: none;
+	background-color: #eea8e2;
+	cursor: pointer;
+	text-align: center;
+	color: white;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.divStyle, a{
+	color: #fff;
+	font-size: 30px;
 }
 
-.App-link {
-  color: #61dafb;
+.board{
+	padding: 20px;
+	width: 320px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	background-color: #ffdafa;
+	border-radius: 20px;
+
+
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.boardDiv{
+	margin-top: 20px;
+	height: 100%;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+.board div{
+	width: 60px;
+	height: 60px;
+	background-color:  #d5b7db;
+	display: inline-block;
+	border: 1px ridge #fff;
+}
+
+
+.divStyle select{
+	border: 2px solid #b2a4e6;
+	font-size: 30px;
+	width: 150px;
+	padding: 4px;
+	margin: 3px;
+	border-radius: 20px;
+	outline: none;
+	background-color: #eea8e2;
+	cursor: pointer;
+	text-align: center;
+	color: white;
+	height: 50px;
+}
+
+.board img{	
+	width: 60px;
+	height: 60px;
+}
+
+.all{
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	margin-top: 20px;
+}
+
+#controls{
+	text-align: center;
+}
+
+
+.statusBoard{
+	width: 350px;
+	height: 40px;
+	background-color: #fff;
+	border-radius: 20px;
+	text-align: center;
+}
+
+
+.NewBoard {
+	display: flex;
+	justify-content: center;
+	margin-top: 50px;
+}
+
+.NewBoard button{
+	padding-left: 50px;
+	border: 2px solid #b2a4e6;
+	font-size: 30px;
+	width: 150;
+	padding: 4px;
+	margin: 3px;
+	border-radius: 20px;
+	outline: none;
+	background-color: #eea8e2;
+	cursor: pointer;
+	color: white;
+}
+
+.ControlBoard {
+	display: flex;
+	justify-content: center;
+	height: 500px;
+	width: 500px;
+	background-color: #CB8DC0;
+	margin-top: 20px;
+}
+
+.divStyle{
+	display: flex;
+	justify-content: center;
+}
+
+.boardStyle{
+	margin-top: 100px;
+
+}
+
+
+
+.controlersDiv{
+	display: flex;
+	justify-content: center;
+	margin-top: 70px;
+}
+
+.controlersDiv div{
+	cursor: pointer;
+
+}
+.controlerDown{
+	margin-top: 70px;
+	margin-left: 20px;
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-top: 50px solid #eea8e2;
+}
+
+
+
+.controlerRight{
+
+	width: 0;
+    height: 0;
+    border-top: 50px solid transparent;
+    border-right: 50px solid #eea8e2;
+    border-bottom: 50px solid transparent;
+}
+
+.controlerUp{
+	margin-left: -100px;
+	margin-top: -10px;
+	width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 50px solid #eea8e2; 
+}
+.controlerLeft{
+	margin-left: 15px;
+	width: 0;
+    height: 0;
+    border-top: 50px solid transparent;
+    border-left: 50px solid #eea8e2;
+    border-bottom: 50px solid transparent;
+}
+
+
+.h2{
+	color: rgb(158, 148, 241);
+	margin-top: 7px;
+}
+
+.boardStyle .status{
+	display: flex;
+	justify-content: center;
+}
+
+
+
+
+
+.deleteButton {
+	width: 50px;
+	height: 50px;
+	background-color: #eea8e2;
+	cursor: pointer;
+	margin-left: 900px;
+	margin-top: -100px;
+	border-radius: 100%;
+	border-style: none;
 }
