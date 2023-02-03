@@ -29,10 +29,15 @@ const gameImg = {
 
 
 export const gameBoardCreateScript = (select,gameBoard,matrix,gameSettings,statusGame) => {
+  for(let i = 0; i < matrix.length; i++){
+    for(let j = 0; j < matrix.length; j++){
+      matrix[i][j] = FREE_CELL
+    }
+  }
 
   gameBoard.current.style.display = "flex"
   statusGame.current.style.display = "none"
-const getRandomFreeCell = (length,matrix) => {
+  const getRandomFreeCell = (length,matrix) => {
   const x = Math.floor(Math.random() * length)
   const y = Math.floor(Math.random() * length)
   if(matrix[y][x] === FREE_CELL){
@@ -119,10 +124,7 @@ export const  gameStartScript = (element,select,gameBoard, matrix, h2, statusGam
     return arrXY
   }
   
-  
-
-  
-
+  const RabbitCoordinate = findCharacterCoordinate(RABBIT_CELL,matrix)[0]
     const searchPlaceRabbit = ([x, y],controler,matrix) => {	
       if(controler === `Up`){
         x -= 1
@@ -151,91 +153,86 @@ export const  gameStartScript = (element,select,gameBoard, matrix, h2, statusGam
       return [x,y]
     }
 
-    function createCell(matrix){
-      gameBoard.current.innerHTML = " "
-      let boardNumber = 0
-      for (let i = 0; i < matrix.length; i++){
-        for(let j = 0; j < matrix.length; j++){
-          const div = document.createElement("div")
-          div.id = `${boardNumber}`
-          gameBoard.current.appendChild(div)
-          boardNumber++
-          if(matrix[i][j] !== 0){
-            const img = document.createElement("img")
-            img.src = gameImg[matrix[i][j]].src
-            img.name = gameImg[matrix[i][j]].name
-            div.appendChild(img)
-          }
+  function createCell(matrix){
+    gameBoard.current.innerHTML = " "
+    let boardNumber = 0
+    for (let i = 0; i < matrix.length; i++){
+      for(let j = 0; j < matrix.length; j++){
+        const div = document.createElement("div")
+        div.id = `${boardNumber}`
+        gameBoard.current.appendChild(div)
+        boardNumber++
+        if(matrix[i][j] !== 0){
+          const img = document.createElement("img")
+          img.src = gameImg[matrix[i][j]].src
+          img.name = gameImg[matrix[i][j]].name
+          div.appendChild(img)
         }
       }
     }
+  }
 
-    const objectPlace = ([x,y],[yBefore, xBefore],character,characterEqual,matrix) => {
-      if(matrix[x][y] === FREE_CELL){
-        matrix[yBefore][xBefore] = FREE_CELL
-        matrix[x][y] = character
-      }
+  const objectPlace = ([x,y],[yBefore, xBefore],character,characterEqual,matrix) => {
+    if(matrix[x][y] === FREE_CELL){
+      matrix[yBefore][xBefore] = FREE_CELL
+      matrix[x][y] = character
+    }
 
-      if(matrix[yBefore][xBefore] === RABBIT_CELL){
-        if(matrix[x][y] === HOME_CELL){
-          gameBoard.current.style.display = "none"
-          statusGame.current.style.display = "flex"
-          h2.current.innerHTML = "You Won!"
-        }
-      }
-    
-      if(matrix[x][y] === characterEqual){
+    if(matrix[yBefore][xBefore] === RABBIT_CELL){
+      if(matrix[x][y] === HOME_CELL){
         gameBoard.current.style.display = "none"
         statusGame.current.style.display = "flex"
-        h2.current.innerHTML = "Game Over"
-      }
-
-    }
-
-
-    const legitimCells = [FREE_CELL, RABBIT_CELL]
-
-    const isLegitimCellForWolf = ([x, y],matrix) => {
-      if (x >= 0 && x < matrix.length && y >= 0 && y < matrix.length && legitimCells.includes(matrix[x][y])) {
-        return [x,y]
+        h2.current.innerHTML = "You Won!"
       }
     }
-
-
-    const calcDistance = ([x1, y1]) => ([x2, y2]) =>
-        Math.abs(x1 - x2) ** 2 + Math.abs(y1 - y2) ** 2
-
-
-
-    const findeH = (allDirections,matrix,[RabbitCoordX,RabbitCoordY], wolvesCoord) => {
-      const legalDirections = allDirections.filter((element) => isLegitimCellForWolf(element,matrix))
-      const distances = legalDirections.map((element) => calcDistance([RabbitCoordX, RabbitCoordY])(element))
-      const minDistance = distances.reduce((element1, element2, i) =>  Math.min(element1,element2))
-      const minDistanceIndex = distances.findIndex((element) => element === minDistance)
-      return legalDirections[minDistanceIndex]
+    
+    if(matrix[x][y] === characterEqual){
+      gameBoard.current.style.display = "none"
+      statusGame.current.style.display = "flex"
+      h2.current.innerHTML = "Game Over"
     }
+  }
 
 
-    const direction = ([x,y]) => {
-      return [
-        [x + 1, y],
-        [x - 1, y],
-        [x, y + 1],
-        [x, y  - 1]
-      ]
+  const legitimCells = [FREE_CELL, RABBIT_CELL]
+  const isLegitimCellForWolf = ([x, y],matrix) => {
+    if (x >= 0 && x < matrix.length && y >= 0 && y < matrix.length && legitimCells.includes(matrix[x][y])) {
+      return [x,y]
     }
+  }
 
-    const RabbitCoordinate = findCharacterCoordinate(RABBIT_CELL,matrix)[0]
-    const rabbitMove= searchPlaceRabbit(RabbitCoordinate, element,matrix)
+
+  const calcDistance = ([x1, y1]) => ([x2, y2]) =>
+    Math.abs(x1 - x2) ** 2 + Math.abs(y1 - y2) ** 2
+
+
+
+  const findeH = (allDirections,matrix,[RabbitCoordX,RabbitCoordY], wolvesCoord) => {
+    const legalDirections = allDirections.filter((element) => isLegitimCellForWolf(element,matrix))
+    const distances = legalDirections.map((element) => calcDistance([RabbitCoordX, RabbitCoordY])(element))
+    const minDistance = distances.reduce((element1, element2, i) =>  Math.min(element1,element2))
+    const minDistanceIndex = distances.findIndex((element) => element === minDistance)
+    return legalDirections[minDistanceIndex]
+  }
+
+
+  const direction = ([x,y]) => {
+    return [
+      [x + 1, y],
+      [x - 1, y],
+      [x, y + 1],
+      [x, y  - 1]
+    ]
+  }
+
+
+  const rabbitMove= searchPlaceRabbit(RabbitCoordinate, element,matrix)
     objectPlace(rabbitMove,RabbitCoordinate,RABBIT_CELL, WOLF_CELL, matrix)
     const wolvesCoordinate = findCharacterCoordinate(WOLF_CELL,matrix)
-
-
     wolvesCoordinate.map((el) => {
       const allDirection = direction(el, matrix.length)
       const h = findeH(allDirection,matrix,RabbitCoordinate, el)
       objectPlace(h, el,WOLF_CELL, RABBIT_CELL, matrix)
     })
-
     createCell(matrix)
 }
