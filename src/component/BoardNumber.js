@@ -1,7 +1,16 @@
 import React from 'react'
 import { CreateBoard } from './CreateBoard'
-export const SendBoardNumber = ({arrayObject}) => {
+import {useSelector} from "react-redux";
+
+export const SendBoardNumber = () => {
+  const objectArray = useSelector((state) => {
+    if(state === undefined){
+      return []
+    }
+    return state
+  })
+
   return (
-    arrayObject.map(el => <CreateBoard element = {el} key={el.id}/>)
+    objectArray.map(el => <CreateBoard element = {el} key={el.id}/>)
   )
 }

@@ -2,6 +2,7 @@ import React, { createRef } from 'react'
 import { gameBoardCreateScript,gameStartScript } from './gameScript'
 
 
+
 export const CreateBoard = ({element}) => {
   const select = createRef()
   const gameBoard = createRef()
