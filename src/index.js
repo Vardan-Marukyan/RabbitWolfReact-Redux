@@ -5,34 +5,10 @@ import reportWebVitals from './reportWebVitals';
 import { createStore} from 'redux';
 import { Provider } from 'react-redux';
 import { SendBoardNumber } from './component/BoardNumber';
-
+import { store, addObject } from './ReduxStore';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-
-
-let ID = 0
-const rootState = (state = [], action ) => {
-  if (action.type === "INCREMENT"){
-    return [
-      ...state,
-      action
-    ]
-  }
-}  
-
-
-const store = createStore(rootState, [])
-const addObject = () => {
-  store.dispatch(
-    {
-      type: "INCREMENT",
-      id: ID++
-    }
-  )
-} 
-
-
 
 root.render(
   <React.StrictMode>
