@@ -7,7 +7,7 @@ const rootState = (state = [], action ) => {
   if (action.type === "INCREMENT"){
     return [
       ...state,
-      action
+      {value: action.value}
     ]
   }
 }
@@ -18,7 +18,7 @@ export const addObject = () => {
   store.dispatch(
     {
       type: "INCREMENT",
-      id: Date.now()
+      value: Date.now()
     }
   )
 } 

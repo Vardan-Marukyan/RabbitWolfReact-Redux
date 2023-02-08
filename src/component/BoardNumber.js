@@ -11,6 +11,6 @@ export const SendBoardNumber = () => {
   })
 
   return (
-    objectArray.map(el => <CreateBoard element = {el} key={el.id}/>)
+    objectArray.map(el => <CreateBoard element = {el} key={el.value}/>)
   )
 }
