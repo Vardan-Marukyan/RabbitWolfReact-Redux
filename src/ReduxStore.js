@@ -5,10 +5,7 @@ import { createStore} from 'redux';
 
 const rootState = (state = [], action ) => {
   if (action.type === "INCREMENT"){
-    return [
-      ...state,
-      {value: action.value}
-    ]
+    return [...state, action.value]
   }
 }
 
